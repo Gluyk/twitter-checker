@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit FilterList{% endblock %}
+
+{% block body %}
+    <h1>Edit FilterList</h1>
+
+    {{ include('filter_list/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('filter_list_index') }}">back to list</a>
+
+    {{ include('filter_list/_delete_form.html.twig') }}
+{% endblock %}

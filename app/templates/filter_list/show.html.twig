@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FilterList{% endblock %}
+
+{% block body %}
+    <h1>FilterList</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ filter_list.id }}</td>
+            </tr>
+            <tr>
+                <th>Filter</th>
+                <td>{{ filter_list.filter }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('filter_list_index') }}">back to list</a>
+
+    <a href="{{ path('filter_list_edit', {'id': filter_list.id}) }}">edit</a>
+
+    {{ include('filter_list/_delete_form.html.twig') }}
+{% endblock %}
