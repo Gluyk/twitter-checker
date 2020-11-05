@@ -10,4 +10,4 @@ WORKDIR /app
 RUN echo "*       *       *       *       *       run-parts /etc/periodic/1min" >> /etc/crontabs/root
 
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["/usr/sbin/crond", "-f" , "-L", "8"]
+CMD ["/usr/sbin/crond", "-f"]

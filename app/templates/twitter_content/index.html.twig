@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TwitterContent index{% endblock %}
+
+{% block body %}
+    <h1>TwitterContent index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Created_at</th>
+                <th>Original_id</th>
+                <th>Text</th>
+                <th>User_screen_name</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for twitter_content in twitter_contents %}
+            <tr>
+                <td>{{ twitter_content.id }}</td>
+                <td>{{ twitter_content.createdAt ? twitter_content.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ twitter_content.originalId }}</td>
+                <td>{{ twitter_content.text }}</td>
+                <td>{{ twitter_content.userScreenName }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

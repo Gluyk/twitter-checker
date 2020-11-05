@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TwitterContent{% endblock %}
+
+{% block body %}
+    <h1>TwitterContent</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ twitter_content.id }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ twitter_content.createdAt ? twitter_content.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Original_id</th>
+                <td>{{ twitter_content.originalId }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ twitter_content.text }}</td>
+            </tr>
+            <tr>
+                <th>User_screen_name</th>
+                <td>{{ twitter_content.userScreenName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('twitter_content_index') }}">back to list</a>
+{% endblock %}
