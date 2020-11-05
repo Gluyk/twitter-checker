@@ -1,0 +1,49 @@
+version: '3.3'
+
+services:
+  db:
+    image: mariadb:latest
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${NAME}
+      MYSQL_USER: ${NAME}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    container_name: ${NAME}_db
+
+  php:
+    build:
+      context: .
+      dockerfile: ./php/php
+    working_dir: /app
+    restart: always
+    volumes:
+      - ./app:/app
+    links:
+      - db
+
+  php_cron:
+    build:
+      context: .
+      dockerfile: ./php/php_cron
+    working_dir: /app
+    restart: always
+    volumes:
+      - ./app:/app
+      - ./php/cron_tasks/:/etc/periodic/:ro
+    links:
+      - db
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./app:/app
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./log/nginx_error.log:/var/log/nginx/error.log
+      - ./log/nginx_access.log:/var/log/nginx/access.log
+    links:
+      - php
+    restart: always
+
